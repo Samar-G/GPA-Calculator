@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <img src="logo_icon.png" alt="logo">
+    </div>
+
+    <div id="data" style="text-align: center; color: antiquewhite;">
+        <!-- Courses: <input name="names" type="text">
+        <br>
+        Grades: <input id="grades" type="number">
+        <br>
+        Hours: <input id="hours" type="number"> -->
+    </div>
+
+    <div id = "table">
+        <!-- <button type="button" onclick="table()">Show table</button>         -->
+    </div>
+
+    <div id = "showGPA">
+        <button type="button" onclick="calculate()">Calculate</button>
+    </div>
+
+    <script>
+        var subjects = prompt("Enter your courses");//document.getElementByName('names');
+        // subjects = subjects.value;
+        subjects = subjects.split(",");
+        // document.write(subjects[0]);
+        var grades = prompt("Enter your grades");
+        grades = grades.split(",");
+        var hours = prompt("Enter your hours");
+        hours = hours.split(",");
+        var len = grades.length;
+        // document.write(hours[0]);
+        var text = "<table> <caption>Grades</caption> <tr> <th>Subject</th> <th>Grade</th></tr> <tr>";
+        for(var i=0; i<len; i ++){
+            text += "<td>"+ subjects[i] + "</td>";
+            text += "<td>"+ grades[i] + "</td>";
+            text += "</tr>"
+        }
+        text += "</table>";
+        document.getElementById("table").innerHTML = text;
+        
+        function calculate(){
+            var gpa = 0;
+            var hourSum = 0;
+            for(var i=0; i<len; i ++){
+                var num = parseFloat(grades[i]);
+                var intHours = parseFloat(hours[i]);
+                // document.write(intHours);
+
+                if (num >= 90 && num <= 100){
+                    gpa += (4*intHours);
+                    hourSum += intHours;
+                } else if(num >= 85 && num < 90){
+                    gpa += (3.7*intHours);
+                    hourSum += intHours;
+                } else if(num >= 80 && num < 85){
+                    gpa += (3.3*intHours);
+                    hourSum += intHours;
+                } else if(num >= 75 && num < 80){
+                    gpa += (3.0*intHours);
+                    hourSum += intHours;
+                } else if(num >= 70 && num < 75){
+                    gpa += (2.7*intHours);
+                    hourSum += intHours;
+                } else if(num >= 65 && num < 70){
+                    gpa += (2.4*intHours);
+                    hourSum += intHours;
+                } else if(num >= 60 && num < 65){
+                    gpa += (2.2*intHours);
+                    hourSum += intHours;
+                } else if(num >= 50 && num < 60){
+                    gpa += (2.0*intHours);
+                    hourSum += intHours;
+                } else if(num >= 0 && num < 50){
+                    gpa += (0*intHours);
+                    hourSum += intHours;
+                }
+            }
+            document.getElementById("showGPA").innerHTML = (gpa/hourSum).toFixed(2);
+            document.getElementById("showGPA").style.marginTop = "30px";
+            document.getElementById("showGPA").style.marginBottom = "30px";
+            document.getElementById("showGPA").style.marginLeft = "46.5%";
+            document.getElementById("showGPA").style.backgroundColor = "rgb(255, 177, 169)";
+            document.getElementById("showGPA").style.color = "rgb(51, 10, 82)";
+            document.getElementById("showGPA").style.width = "80px";
+            document.getElementById("showGPA").style.height = "17px";
+            document.getElementById("showGPA").style.padding = "15px";
+            document.getElementById("showGPA").style.borderRadius = "7px";
+            document.getElementById("showGPA").style.fontWeight = "bold";
+        }
+    </script>
+</body>
+</html>
